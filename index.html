@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Api</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h2>Enter City Name</h2>
+    <input type="text" id="city_name" />
+    <button id="submit">Get Temprature</button>
+    <h1 id="result"></h1>
+    <script>
+      const Btnchk = document.getElementById("submit");
+      Btnchk.addEventListener("click", () => {
+        let cityVal = document.getElementById("city_name").value;
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&APPID=79b177a0b6bfe0428f9bf84b51eba5e9&units=metric`)
+          .then((response) => {
+            //$units=metric is unit of measurement added
+            console.log(response);
+            console.log(response.data.main.temp); //https://openweathermap.org/history-bulk
+            //main.temp give us temprature
+            document.getElementById("result").textContent =
+              response.data.main.temp;
+          });
+      });
+    </script>
+  </body>
+</html>
